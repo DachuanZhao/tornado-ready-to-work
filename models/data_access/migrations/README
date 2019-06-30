@@ -1,0 +1,8 @@
+Generic single-database configuration.
+
+#生成迁移记录并迁移
+# alembic revision --autogenerate -m "init table"
+# alembic upgrade head
+
+#重新读取数据库，初始化当前状态
+#alembic stamp head
