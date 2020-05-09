@@ -10,8 +10,6 @@ sys.path.append(APP_DIR)
 from libs.common_function import HandlerTool
 
 class HelloWorldHandler(tornado.web.RequestHandler):
-
-    executor = concurrent.futures.ThreadPoolExecutor()
     #def _request_summary(self):
     #    return "%s %s (%s)" % (self.request.method, self.request.uri,
     #                           self.request.remote_ip)

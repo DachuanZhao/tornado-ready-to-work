@@ -8,21 +8,20 @@ import tornado.netutil
 import logging
 
 from config import *
-from models.data_access.sql_model import sessionmaker,engine
-from models.data_access.neo4j_model import NEO4J_DRIVER
+from models.data_access.sql_model import DBSession
+#from models.data_access.neo4j_model import NEO4J_DRIVER
 
-from handlers.handler_hello_world import HelloWorldHandler
-from handlers.handler_login import LoginHandler
-#from handlers.handler_register import RegisterHandler
+from handlers.handler_common.handler_hello_world import HelloWorldHandler
+#from handlers.handler_common.handler_login import LoginHandler
+#from handlers.handler_common.handler_register import RegisterHandler
 
 def tornado_app():
     app = tornado.web.Application([
         (URL_PREFIX + r"/", HelloWorldHandler),
-        (URL_PREFIX + r"/login/", LoginHandler),
         #(URL_PREFIX + r"/register/",RegisterHandler),
     ],**setting)
-    app.DBSession = sessionmaker(bind=engine)
-    app.NEO4J_DRIVER = NEO4J_DRIVER
+    app.DBSession = DBSession
+    #app.NEO4J_DRIVER = NEO4J_DRIVER
     return app
 
 if __name__ == "__main__":

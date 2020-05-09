@@ -1,4 +1,3 @@
-import neomodel,concurrent.futures
 import json,logging
 import configparser,os
 import numpy as np
@@ -7,10 +6,12 @@ import sys
 import neo4j
 
 #数据库配置文件
-APP_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+APP_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 config_ini = configparser.ConfigParser()
 config_ini.read(os.path.join(APP_DIR,"config.ini"))
+print(os.path.join(APP_DIR,"config.ini"))
+print(config_ini.keys())
 config_ini_database = config_ini["database"]
 
 
