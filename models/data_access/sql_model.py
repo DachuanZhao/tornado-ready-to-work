@@ -27,7 +27,7 @@ MYSQL_PORT = config_ini_database["MYSQL_PORT"]
 MYSQL_DATABASE = config_ini_database["MYSQL_DATABASE"]
 MYSQL_USERNAME = config_ini_database["MYSQL_USERNAME"]
 MYSQL_PASSWORD = config_ini_database["MYSQL_PASSWORD"]
-MYSQL_DB_URL = 'mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8'.format(MYSQL_USERNAME,MYSQL_PASSWORD,MYSQL_HOST,MYSQL_PORT,MYSQL_DATABASE)
+MYSQL_DB_URL = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(MYSQL_USERNAME,MYSQL_PASSWORD,MYSQL_HOST,MYSQL_PORT,MYSQL_DATABASE)
 
 Base = declarative_base()
 
@@ -58,7 +58,7 @@ metadata = MetaData()
 # 创建DBSession类型:
 DBSession = sessionmaker(bind=engine)
 #确保同一个线程中用的是一个session
-db_session = scoped_session(DBSession)
+#db_session = scoped_session(DBSession)
 
 class User(Base):
     __tablename__ = 'user'

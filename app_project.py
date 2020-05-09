@@ -8,25 +8,35 @@ import tornado.netutil
 import logging
 
 from config import *
+from models.data_access.sql_model import sessionmaker,engine
+from models.data_access.neo4j_model import NEO4J_DRIVER
 
 from handlers.handler_hello_world import HelloWorldHandler
 from handlers.handler_login import LoginHandler
 #from handlers.handler_register import RegisterHandler
 
 def tornado_app():
-    return tornado.web.Application([
+    app = tornado.web.Application([
         (URL_PREFIX + r"/", HelloWorldHandler),
         (URL_PREFIX + r"/login/", LoginHandler),
         #(URL_PREFIX + r"/register/",RegisterHandler),
     ],**setting)
+    app.DBSession = sessionmaker(bind=engine)
+    app.NEO4J_DRIVER = NEO4J_DRIVER
+    return app
 
 if __name__ == "__main__":
     #读取命令行参数
     tornado.options.parse_command_line()
 
-    tornado_sockets = tornado.netutil.bind_sockets(tornado.options.options.port)
-    tornado.process.fork_processes(0)
-    tornado_server = tornado.httpserver.HTTPServer(tornado_app(),max_buffer_size=MAX_BUFFER_SIZE)#2G
-    tornado_server.add_sockets(tornado_sockets)
+    #多进程启动
+    #tornado_sockets = tornado.netutil.bind_sockets(tornado.options.options.port)
+    ##tornado.process.fork_processes(0)
+    #tornado_server = tornado.httpserver.HTTPServer(tornado_app(),max_buffer_size=MAX_BUFFER_SIZE)#2G
+    #tornado_server.add_sockets(tornado_sockets)
 
+    #单进程启动
+    tornado_server = tornado.httpserver.HTTPServer(tornado_app(),max_buffer_size=MAX_BUFFER_SIZE,xheaders = True)#2G
+    tornado_server.listen(tornado.options.options.port)
+    logging.info("tornado即将启动，端口为{}".format(tornado.options.options.port))
     tornado.ioloop.IOLoop.current().start()
