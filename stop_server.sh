@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "------------------------"
-port_default=9010
+
+port_default=8031
 
 if [ -n "$1" ]
 then
@@ -12,6 +13,9 @@ else
 		port=$port_default
 	fi
 fi
+
+echo $port
+
 #循环遍历杀死所有对应port的进程，因为开启了多进程
 while :
 do

@@ -1,8 +1,15 @@
 #!/bin/bash
 echo "------------------------"
 
+base_dir="."
+log_dir="${base_dir}/log"
+#python="/home/zhaodachuan/anaconda3/bin/python3.7"
 python="python"
-port_default=9010
+conf="${base_dir}/conf/dip_kg_server.conf"
+port_default=8031
+conda_name="kg_online_proj"
+
+#conda activate ${conda_name}
 
 if [ -n "$1" ]
 then
@@ -14,8 +21,7 @@ else
 		port=${port_default}
 	fi
 fi
-
-echo "nohup ${python} app_data_labeling_platform.py -port=$port &"
+echo "nohup ${python} app_project.py --port=$port &"
 #判断文件是否存在，如果存在则转移
 if [ ! -d "./tornado.log" ];then
     time=$(date "+%Y-%m-%d-%H:%M:%S")
@@ -28,3 +34,4 @@ echo "------------------------"
 echo "------------------------"
 echo "------------------------"
 tail -f tornado.log -n 100
+

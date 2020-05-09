@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "------------------------"
 
-port_default=9010
+port_default=8031
 
 if [ -n "$1" ]
 then

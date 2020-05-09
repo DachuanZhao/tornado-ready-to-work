@@ -11,14 +11,14 @@ from config import *
 from models.data_access.sql_model import DBSession
 #from models.data_access.neo4j_model import NEO4J_DRIVER
 
-from handlers.handler_common.handler_hello_world import HelloWorldHandler
-#from handlers.handler_common.handler_login import LoginHandler
-#from handlers.handler_common.handler_register import RegisterHandler
+from handlers.common.hello_world import HelloWorldHandler
+#from handlers.common.login import LoginHandler
+#from handlers.common.register import RegisterHandler
 
 def tornado_app():
     app = tornado.web.Application([
         (URL_PREFIX + r"/", HelloWorldHandler),
-        #(URL_PREFIX + r"/register/",RegisterHandler),
+        #(URL_PREFIX + r"/register",RegisterHandler),
     ],**setting)
     app.DBSession = DBSession
     #app.NEO4J_DRIVER = NEO4J_DRIVER
