@@ -26,7 +26,7 @@ logging.info("setting is " + str(setting))
 URL_PREFIX = r"/" + config_ini_identification["PREFIX"]
 
 #调整端口
-tornado.options.define("port", default=9010, help="run on the given port", type=int)
+tornado.options.define("port", default=9000, help="run on the given port", type=int)
 
 #自定义日志等级
 tornado.options.options.logging = "INFO"
